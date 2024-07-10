@@ -149,6 +149,13 @@ void listaventa(venta vent[], int cantidadventa){
 		}
 	}
 } 
+void totalventa(venta vent[], int cantidadventa){
+	float total=0; 
+	for(int i=0; i<cantidadventa; ++i){
+		total=total+vent[i].preciototal;
+	}
+	cout<<"Las ventas totales son: "<<total<<endl; 
+}
 int main(){
 	producto prod[limite];
 	venta	 vent[ventalimite];
@@ -199,6 +206,9 @@ int main(){
 				break;
 			case 7:
 				listaventa(vent, cantidadventa);
+				break;
+			case 8:
+				totalventa(vent, cantidadventa);
 				break;
 			default:
 				break;
