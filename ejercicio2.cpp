@@ -22,6 +22,7 @@ S: Salir del programa.
 #include <string.h>
 using namespace std;
 const int limite = 10;
+const int ventalimite = 10;
 struct producto{
 	string nombre;
 	float precio;
@@ -91,11 +92,53 @@ void actualizarproducto(producto articulo[], int cantidadproducto, int indice){
 		cout<<"\n"; 
 	cout<<"Actualizado producto\n";
 }
+void eliminarproducto(producto articulo[], int cantidadproducto, int indice){
+	if(indice<0 || indice>=cantidadproducto){
+		cout << "Indice no valido" << endl;
+		return;
+	}	
+	for (int i=indice; i<cantidadproducto-1; i++){
+		articulo[i]=articulo[i+1];
+	}
+	cantidadproducto--;
+	cout << "Producto eliminado\n " << endl;
+}
+
+void registrarventa(venta vent[], producto prod[], int cantidadproducto, int &cantidadventa) {
+    if (cantidadventa >= ventalimite) {
+        cout << "Sin espacio suficiente\n";
+        return;
+    }
+    venta nuevaventa;
+    cout <<"Nombre del producto vendido: ";
+    cin.ignore();
+    getline(cin, nuevaventa.producto);
+    bool confirmacion = false;
+    for (int i = 0; i < cantidadproducto; ++i) {
+        if (prod[i].nombre == nuevaventa.producto) {
+            confirmacion = true;
+            nuevaventa.preciototal = prod[i].precio;
+            break;
+        }
+    }
+    if (confirmacion = false) {
+        cout << "El producto no existe. No se puede registrar la venta.\n";
+        return;
+    }
+    cout << "Ingrese la cantidad vendida: ";
+    cin >> nuevaventa.cantidad;
+    nuevaventa.preciototal *= nuevaventa.cantidad;
+    nuevaventa.idventa = cantidadventa + 1;
+    vent[cantidadventa] = nuevaventa;
+    cantidadventa++;
+    cout << "Venta registrada\n";
+}
 int main(){
 	producto prod[limite];
-	venta	 vent[limite];
+	venta	 vent[ventalimite];
 	int respuesta, indice;
 	int cantidadproducto = 0;
+	int cantidadventa = 0;
 	do {
 		cout << "INVENTARIO DE PRODUCTOS Y VENTAS" << endl;
 		cout << "Elije una opcion" << endl;
@@ -130,10 +173,17 @@ int main(){
 				cin >> indice;
 				actualizarproducto(prod, cantidadproducto, indice);
 				break;
+			case 5:
+				cout << "Ingresar el indice a eliminar su producto: " << endl;
+				cin >> indice;
+				eliminarproducto(prod, cantidadproducto, indice);
+				break;
+			case 6:
+				registrarventa(vent, prod, cantidadproducto, cantidadventa);
+				break;
 			default:
 				break;
 		}
 	}while(9!=0);
-	
 	return 0;
 }
