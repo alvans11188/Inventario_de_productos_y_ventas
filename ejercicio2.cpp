@@ -133,6 +133,22 @@ void registrarventa(venta vent[], producto prod[], int cantidadproducto, int &ca
     cantidadventa++;
     cout << "Venta registrada\n";
 }
+void listaventa(venta vent[], int cantidadventa){
+	if(cantidadventa == 0){
+		cout<<"Nose registro ninguna venta. :( "<<endl;  
+	}
+	else{
+		cout<<"Registro de venta: "<<endl; 
+		for(int i=0; i<cantidadventa; ++i){
+			cout<<"Venta : "<<i+1<<" | "<<"INDICE: "<<" -> "<<i<<endl; 
+			cout<<"Identificador venta: "<<vent[i].idventa<<endl; 
+			cout<<"Nombre del producto vendido: "<<vent[i].producto<<endl; 
+			cout<<"Cantidad que se vendio: "<<vent[i].cantidad<<endl; 
+			cout<<"Precio en el que se vendio: "<<vent[i].preciototal<<endl; 
+			cout<<"\n"; 
+		}
+	}
+} 
 int main(){
 	producto prod[limite];
 	venta	 vent[ventalimite];
@@ -180,6 +196,9 @@ int main(){
 				break;
 			case 6:
 				registrarventa(vent, prod, cantidadproducto, cantidadventa);
+				break;
+			case 7:
+				listaventa(vent, cantidadventa);
 				break;
 			default:
 				break;
