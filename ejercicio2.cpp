@@ -77,10 +77,24 @@ void buscarProducto(producto articulo[], int cantidadproducto, const string& nom
     	        cout<<"\nEl producto:  '"<<nombre<<"' no se logro encontraro.\n";
    		    }
 }
+void actualizarproducto(producto articulo[], int cantidadproducto, int indice){
+	if(indice<0 || indice>=cantidadproducto){
+	 	cout<<"Indice no valido. "; 
+		 return;
+	}
+        cout<<"\nActualizando producto...\n"; 
+        cout<<"Digite el nuevo producto: ";
+		cin.ignore();
+		getline(cin,articulo[indice].nombre); 
+		cout<<"Ingrese su nuevo precio: "; 
+		cin>>articulo[indice].precio; 
+		cout<<"\n"; 
+	cout<<"Actualizado producto\n";
+}
 int main(){
 	producto prod[limite];
 	venta	 vent[limite];
-	int respuesta;
+	int respuesta, indice;
 	int cantidadproducto = 0;
 	do {
 		cout << "INVENTARIO DE PRODUCTOS Y VENTAS" << endl;
@@ -111,6 +125,11 @@ int main(){
      	        buscarProducto(prod, cantidadproducto, nombre); 
      	        break;
 				}
+			case 4:
+				cout << "Ingrese el indice a actualizar el producto: " << endl;
+				cin >> indice;
+				actualizarproducto(prod, cantidadproducto, indice);
+				break;
 			default:
 				break;
 		}
