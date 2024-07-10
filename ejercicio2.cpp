@@ -34,19 +34,19 @@ struct venta{
 };
 void registrarproducto(producto prod[], int &cantidadproducto){
 	if (cantidadproducto >= limite){
-		cout << "La cantidad es mayor al limite" << endl;
+		cout << "La cantidad es mayor al limite\n" << endl;
 		
 	}else{
 		producto art;
-		cout << "Digite el producto";
+		cout << "Digite el producto: ";
 		cin.ignore();
 		getline(cin,art.nombre);
-		cout << "Ingrese el precio del producto";
+		cout << "Ingrese el precio del producto: ";
 		cin >> art.precio;
 		cout << "\n";
 		prod[cantidadproducto] = art;
 		cantidadproducto++;
-		cout << "producto registrado"<< endl;
+		cout << "producto registrado\n"<< endl;
 	}
 } 
 void listarproducto(producto prod[], int cantidadproducto){
@@ -54,14 +54,29 @@ void listarproducto(producto prod[], int cantidadproducto){
 		cout<<"\nNingun producto añadido "<<endl;
 	}else{
 	   for(int i=0; i<cantidadproducto; ++i){
-	   		
-	    	cout<<"Nombre: "<<art[i].nombre<<endl;
-	   		cout<<"Precio: "<<art[i].precio<endl;
+	   		cout<<"Nombre: "<<prod[i].nombre<<endl;
+	   		cout<<"Precio: "<<prod[i].precio<<endl;
 	   		cout<<"\n"; 
 	   }
 	}
 }
-
+void buscarProducto(producto articulo[], int cantidadproducto, const string& nombre){ 
+		bool confirmacion = false; 
+        cout<<"Busqueda del producto\n"; 
+	 	for(int i=0; i<cantidadproducto; ++i){
+	 		if(articulo[i].nombre == nombre){
+	 			cout<<"Producto: "<<i+1<<" | "<<" -> "<<"INDICE: "<<i<<endl; 
+ 				cout<<"Nombre del producto: "<<articulo[i].nombre<<endl;
+ 				cout<<"Precio del producto: "<<articulo[i].precio<<endl;
+				cout<<"\n";
+				confirmacion = true; 
+		 		break; 
+ 	        }
+         }
+ 	        if (confirmacion == false){
+    	        cout<<"\nEl producto:  '"<<nombre<<"' no se logro encontraro.\n";
+   		    }
+}
 int main(){
 	producto prod[limite];
 	venta	 vent[limite];
@@ -86,7 +101,16 @@ int main(){
 				registrarproducto(prod, cantidadproducto);
 				break;
 			case 2:
-				listarproductos(prod, cantidadproducto)
+				listarproducto(prod, cantidadproducto);
+			case 3:
+				{
+				string nombre; 
+	      	    cout<<"\nNombre del producto para buscar: "; 
+	      	    cin.ignore(); 
+	      	    getline(cin, nombre); 
+     	        buscarProducto(prod, cantidadproducto, nombre); 
+     	        break;
+				}
 			default:
 				break;
 		}
