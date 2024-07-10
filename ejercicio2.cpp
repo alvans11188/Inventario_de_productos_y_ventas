@@ -210,9 +210,11 @@ int main(){
 			case 8:
 				totalventa(vent, cantidadventa);
 				break;
+			case 9:
+				cout << "Fin del programa" << endl;
 			default:
 				break;
 		}
-	}while(9!=0);
+	}while(respuesta!=9);
 	return 0;
 }
